@@ -3,19 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=landing.html">
-    <title>IA Generativa - Redirigiendo...</title>
+    <title>IA Generativa - Inicio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #F2F5F3; font-family: 'DM Sans', sans-serif; color: #101411; }
-        .loader { text-align: center; }
-        .loader span { color: #0FBF3E; font-weight: 700; }
+        :root {
+            --gris-1: #F2F5F3;
+            --gris-6: #101411;
+            --accent: #0FBF3E;
+            --accent-hover: #08872B;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--gris-1);
+            color: var(--gris-6);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--gris-1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 50px rgba(16, 20, 17, 0.1);
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+        }
+        .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--gris-6);
+        }
+        p {
+            color: #909692;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.75rem;
+            border-radius: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            width: 100%;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(15, 191, 62, 0.35);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(15, 191, 62, 0.45);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--gris-6);
+            border: 1px solid #E4EBE6;
+        }
+        .btn-ghost:hover {
+            background: #F2F5F3;
+            border-color: #B6BFB8;
+        }
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #909692;
+        }
     </style>
 </head>
 <body>
-    <div class="loader">
-        <div style="width: 40px; height: 40px; border: 3px solid #E4EBE6; border-top: 3px solid #0FBF3E; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
-        <p>Cargando <span>IA Generativa</span>...</p>
+    <div class="card">
+        <div class="icon">🧠</div>
+        <h1>IA Generativa</h1>
+        <p>Plataforma educativa sobre los fundamentos de la IA Generativa.</p>
+        <div class="btn-group">
+            <a href="landing.html" class="btn btn-primary">Entrar a la plataforma</a>
+            <a href="login.html" class="btn btn-ghost">Ya tengo cuenta</a>
+            <a href="register.html" class="btn btn-ghost">Crear cuenta</a>
+        </div>
+        <div class="footer">
+            <p>© 2024 IA Generativa - Plataforma educativa</p>
+        </div>
     </div>
-    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 </body>
 </html>

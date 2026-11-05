@@ -2,51 +2,37 @@
 
 Sitio web educativo sobre los fundamentos de la IA Generativa con autenticación mediante Firebase.
 
-## Despliegue en Vercel
+## Cómo ejecutar localmente (Windows)
 
-### Opción 1: Conectar repositorio de GitHub
+### Opción 1: Doble clic (Recomendado)
 
-1. Sube este código a un repositorio de GitHub
-2. Ve a [Vercel](https://vercel.com) e importa el repositorio
-3. Configura:
-   - **Framework Preset**: Vite (o deja en "Other")
-   - **Build Command**: `npm run build` (o dejar vacío)
-   - **Output Directory**: `.` (directorio raíz)
-4. Haz clic en Deploy
+Haz doble clic en **`abrir.bat`** dentro de la carpeta `aplicacionWebEducativa/`.
 
-### Opción 2: Con Vercel CLI
+Esto abrirá automáticamente la página en tu navegador predeterminado.
 
-```bash
-# Instalar Vercel CLI
-npm install -g vercel
+### Opción 2: PowerShell
 
-# Desplegar
-vercel --prod
-```
+Haz clic derecho sobre **`ABRIR.ps1`** → "Ejecutar con PowerShell".
 
-### Configuración de Firebase (Obligatorio)
+### Opción 3: Abrir manualmente
 
-Antes de que funcione el login/registro, debes configurar Firebase:
-
-1. Ve a [Firebase Console](https://console.firebase.google.com/)
-2. Selecciona tu proyecto `talleria-2f756`
-3. Ve a **Authentication → Sign-in method**
-4. Activa **Email/Password** y guarda
-5. Ve a **Authentication → Settings → Authorized domains**
-6. Agrega tu dominio de Vercel (ej: `tu-proyecto.vercel.app`)
+Busca y abre el archivo **`index.html`** o **`landing.html`** directamente en tu navegador (Chrome, Edge, Firefox, etc.).
 
 ## Estructura del proyecto
 
 ```
 aplicacionWebEducativa/
-├── index.html              # Redirección a landing
-├── landing.html            # Página principal (hero + contenido)
-├── login.html              # Inicio de sesión
-├── register.html           # Registro de usuarios
-├── styles.css              # Estilos principales
-├── vercel.json             # Configuración de Vercel
-├── package.json            # Metadata del proyecto
-└── README.md               # Este archivo
+├── index.html         # Página de inicio local
+├── landing.html       # Página principal (hero + contenido)
+├── login.html         # Inicio de sesión
+├── register.html      # Registro de usuarios
+├── styles.css         # Estilos principales
+├── script.js          # Lógica de la aplicación
+├── firebase-config.js # Configuración de Firebase
+├── abrir.bat          # Ejecutable Windows (doble clic)
+├── ABRIR.ps1          # Ejecutable PowerShell
+├── dashboard.html     # Panel de usuario (interno)
+└── README.md          # Este archivo
 ```
 
 ## Características
@@ -57,4 +43,19 @@ aplicacionWebEducativa/
 - ✅ Línea de tiempo interactiva con imágenes
 - ✅ Visualizador de tokens
 - ✅ Panel de usuario con logout
-- ✅ Despliegue listo para Vercel
+- ✅ Ejecutable para Windows (.bat y .ps1)
+
+## Configuración de Firebase (Obligatorio)
+
+Antes de que funcione el login/registro, debes configurar Firebase:
+
+1. Ve a [Firebase Console](https://console.firebase.google.com/)
+2. Selecciona tu proyecto `talleria-2f756`
+3. Ve a **Authentication → Sign-in method**
+4. Activa **Email/Password** y guarda
+5. Ve a **Authentication → Settings → Authorized domains**
+6. Agrega `localhost` si pruebas localmente, o tu dominio si lo subes a hosting
+
+## No requiere servidor
+
+Este sitio es totalmente estático. No necesitas instalar Node.js, Python, ni ningún servidor web. Solo abre los archivos HTML directamente en tu navegador.

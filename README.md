@@ -2,33 +2,41 @@
 
 Sitio web educativo sobre los fundamentos de la IA Generativa con autenticación mediante Firebase.
 
-## 🌐 Ver en vivo (GitHub Pages)
+---
 
-Si el dueño del repositorio ha activado GitHub Pages, puedes abrir la plataforma directamente desde aquí:
+## 🌐 ENLACE DIRECTO (GitHub Pages)
 
-> [🚀 Abrir IA Generativa en vivo](https://EdwinSchneider1115.github.io/TallerIA/landing.html)
+**Link de la web:**  
+👉 **https://EdwinSchneider1115.github.io/TallerIA/landing.html**
 
-> ⚠️ Si el enlace no funciona, es porque GitHub Pages aún no está activado. Ve a **Settings → Pages** en el repositorio y activa la fuente `main` / `(root)`.
+### ¿Cómo entrar?
+
+1. Copia y pega este enlace en tu navegador:  
+   **https://EdwinSchneider1115.github.io/TallerIA/landing.html**
+
+2. O haz clic directo si estás leyendo esto en GitHub.
+
+> ⚠️ **Importante:** Si al entrar te dice "404" o la página no carga, significa que el dueño del repositorio aún no ha activado GitHub Pages.  
+> Para activarlo: ve a **Settings → Pages** → selecciona rama `main` y carpeta `/(root)` → guarda.
 
 ---
 
-## Cómo ejecutar localmente (Windows)
+## 💻 Cómo ejecutar localmente (Windows)
+
+Si prefieres descargar el proyecto y abrirlo en tu computadora:
 
 ### Opción 1: Doble clic (Recomendado)
-
 Haz doble clic en **`abrir.bat`** dentro de la carpeta `aplicacionWebEducativa/`.
 
-Esto abrirá automáticamente la página en tu navegador predeterminado.
-
 ### Opción 2: PowerShell
-
 Haz clic derecho sobre **`ABRIR.ps1`** → "Ejecutar con PowerShell".
 
 ### Opción 3: Abrir manualmente
-
 Busca y abre el archivo **`index.html`** o **`landing.html`** directamente en tu navegador (Chrome, Edge, Firefox, etc.).
 
-## Estructura del proyecto
+---
+
+## 📁 Estructura del proyecto
 
 ```
 aplicacionWebEducativa/
@@ -45,7 +53,9 @@ aplicacionWebEducativa/
 └── README.md          # Este archivo
 ```
 
-## Características
+---
+
+## ✨ Características
 
 - ✅ Diseño responsive y moderno
 - ✅ Animaciones al scroll y partículas de fondo
@@ -55,7 +65,9 @@ aplicacionWebEducativa/
 - ✅ Panel de usuario con logout
 - ✅ Ejecutable para Windows (.bat y .ps1)
 
-## Configuración de Firebase (Obligatorio)
+---
+
+## 🔐 Configuración de Firebase (Obligatorio para login/registro)
 
 Antes de que funcione el login/registro, debes configurar Firebase:
 
@@ -64,8 +76,10 @@ Antes de que funcione el login/registro, debes configurar Firebase:
 3. Ve a **Authentication → Sign-in method**
 4. Activa **Email/Password** y guarda
 5. Ve a **Authentication → Settings → Authorized domains**
-6. Agrega `localhost` si pruebas localmente, o tu dominio de GitHub Pages si lo hospedas allí
+6. Agrega `localhost` (para local) o tu dominio de GitHub Pages
 
-## No requiere servidor
+---
+
+## 🖥️ No requiere servidor
 
 Este sitio es totalmente estático. No necesitas instalar Node.js, Python, ni ningún servidor web. Solo abre los archivos HTML directamente en tu navegador.

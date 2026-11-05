@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regístrate | IA Generativa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="landing.html" class="brand">
+                <svg class="brand-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    <path d="M12 22V12"/>
+                </svg>
+                <span>IA Generativa</span>
+            </a>
+            <a href="landing.html" class="btn btn-ghost btn-sm">Volver al inicio</a>
+        </div>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-form-card">
+            <div class="auth-header">
+                <div class="auth-icon-svg">✨</div>
+                <h1>Crear cuenta</h1>
+                <p>Únete a la plataforma y comienza a aprender sobre IA generativa.</p>
+            </div>
+
+            <form id="register-form" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="name">Nombre completo</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Juan Pérez" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="tu@correo.com" required>
+                </div>
+
+                <div class="form-group position-relative">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required minlength="6">
+                    <span class="form-hint">Mínimo 6 caracteres</span>
+                </div>
+
+                <div class="form-group position-relative">
+                    <label class="form-label" for="confirm-password">Confirmar contraseña</label>
+                    <input type="password" id="confirm-password" name="confirm-password" class="form-input" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" id="register-btn">Crear cuenta</button>
+            </form>
+
+            <div class="divider"><span>o</span></div>
+
+            <p class="auth-cta">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 IA Generativa - Plataforma educativa</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtxMJju-8hOMdqFhLL85TLXzTcMCY3D44",
+            authDomain: "talleria-2f756.firebaseapp.com",
+            projectId: "talleria-2f756",
+            storageBucket: "talleria-2f756.firebasestorage.app",
+            messagingSenderId: "590645983040",
+            appId: "1:590645983040:web:7e6a816e5b5954de04aca5",
+            measurementId: "G-8NCD93QMGR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const form = document.getElementById('register-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const registerBtn = document.getElementById('register-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Por favor completa todos los campos.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('La contraseña debe tener al menos 6 caracteres.');
+                return;
+            }
+
+            registerBtn.textContent = 'Creando cuenta...';
+            registerBtn.disabled = true;
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, { displayName: name });
+                window.location.href = 'landing.html';
+            } catch (error) {
+                console.error(error);
+                let message = 'Error al crear la cuenta.';
+                if (error.code === 'auth/email-already-in-use') {
+                    message = 'Este correo ya está registrado.';
+                } else if (error.code === 'auth/invalid-email') {
+                    message = 'Correo inválido.';
+                } else if (error.code === 'auth/weak-password') {
+                    message = 'Contraseña demasiado débil.';
+                } else if (error.code === 'auth/operation-not-allowed') {
+                    message = 'Habilita Email/Password en Firebase Console.';
+                }
+                alert(message);
+                registerBtn.textContent = 'Crear cuenta';
+                registerBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

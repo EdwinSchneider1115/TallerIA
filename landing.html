@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aprende los fundamentos de la IA Generativa: historia, arquitectura Transformer, tokens y límites fundamentales.">
+    <title>IA Generativa | Fundamentos Educativos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Loader de entrada -->
+    <div class="loader-overlay" id="loader">
+        <div class="loader-logo">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                <path d="M12 22V12"/>
+            </svg>
+        </div>
+        <div class="loader-text">Cargando IA Generativa</div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill" id="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Canvas de fondo con partículas -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="bg-gradient"></div>
+
+    <!-- Header fijo -->
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="#" class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        <path d="M12 22V12"/>
+                    </svg>
+                </div>
+                <span>IA Generativa</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#historia" class="nav-link">Historia</a></li>
+                    <li><a href="#modelo" class="nav-link">Modelo IA</a></li>
+                    <li><a href="#llm" class="nav-link">LLM</a></li>
+                    <li><a href="#limites" class="nav-link">Límites</a></li>
+                    <li><a href="#claves" class="nav-link">Claves</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions" id="header-actions">
+                <span class="user-badge" id="user-badge">Invitado</span>
+                <button class="btn btn-logout" id="btn-logout" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    Cerrar sesión
+                </button>
+                <button class="btn btn-primary btn-sm" id="btn-login" style="display: none;">Iniciar sesión</button>
+                <button class="btn btn-ghost btn-sm" id="btn-register">Regístrate gratis</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <span class="hero-badge">✨ Plataforma educativa</span>
+                <h1>Domina los fundamentos de la <span>IA Generativa</span></h1>
+                <p>Contenido técnico sobre la historia de la IA, arquitectura Transformer, procesamiento por tokens y los límites que todo desarrollador debe conocer.</p>
+                <div class="hero-actions">
+                    <a href="#historia" class="btn btn-primary">Explorar contenido</a>
+                    <a href="login.html" class="btn btn-ghost">Iniciar sesión</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrap">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="Red neuronal y conectividad digital" class="hero-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80'">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-float">
+                    <img src="https://images.unsplash.com/photo-1638151762857-e2e687470239?w=200&q=80" alt="Chip digital" loading="lazy" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido principal (oculto hasta iniciar sesión) -->
+    <main class="main-content" id="main-content" style="display: none;">
+
+        <!-- Historia -->
+        <section class="section" id="historia">
+            <div class="section-content">
+                <div class="section-header">
+                    <span class="section-tag">📜 01</span>
+                    <h2 class="section-title">Historia de la IA</h2>
+                    <p class="section-subtitle">Desde Turing hasta ChatGPT</p>
+                </div>
+                <div class="timeline" id="timeline-container"></div>
+            </div>
+        </section>
+
+        <!-- Modelo IA -->
+        <section class="section section-alt" id="modelo">
+            <div class="section-content">
+                <div class="section-header">
+                    <span class="section-tag">🧠 02</span>
+                    <h2 class="section-title">¿Qué es un modelo de IA?</h2>
+                    <p class="section-subtitle">Aprendizaje de patrones, no memorización</p>
+                </div>
+                <div class="grid grid-2">
+                    <div class="card reveal">
+                        <div class="card-image-wrap">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80" alt="Cerebro digital y redes neuronales" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80'">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Redes neuronales profundas</h3>
+                            <p>Un modelo ajusta millones de parámetros internos para reconocer patrones en los datos de entrenamiento. No memoriza, aprende la estructura subyacente.</p>
+                        </div>
+                    </div>
+                    <div class="card reveal">
+                        <div class="card-image-wrap">
+                            <img src="https://images.unsplash.com/photo-1531297464030-814080594d9b?w=600&q=80" alt="Estudiante aprendiendo" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80'">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-body">
+                            <h3>La analogía del estudiante</h3>
+                            <p>Imagina un estudiante que leyó millones de páginas. No recuerda cada una, pero aprendió cómo se arman las frases y explican los temas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-box reveal">
+                    <h4>Parámetros = Conocimiento comprimido</h4>
+                    <p>GPT-3 tiene 175 mil millones de parámetros. Cada uno codifica una fracción de los patrones del lenguaje humano.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LLM -->
+        <section class="section" id="llm">
+            <div class="section-content">
+                <div class="section-header">
+                    <span class="section-tag">💬 03</span>
+                    <h2 class="section-title">Cómo funciona un LLM</h2>
+                    <p class="section-subtitle">Tokens, atención y predicción</p>
+                </div>
+
+                <div class="grid grid-3" id="components-container"></div>
+
+                <div class="stages-section">
+                    <h3 class="stages-title">Tres etapas de creación</h3>
+                    <div class="stages-track" id="stages-container"></div>
+                </div>
+
+                <div class="tokenizer-card reveal">
+                    <h3>Visualizador de Tokens</h3>
+                    <p>Escribe texto para ver cómo lo fragmenta un modelo de lenguaje.</p>
+                    <textarea id="tokenizer-input" rows="3" placeholder="Escribe algo aquí..."></textarea>
+                    <div class="token-output" id="token-output"></div>
+                    <div class="token-stats">
+                        <span id="token-count">0 tokens</span>
+                        <span id="char-count">0 caracteres</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Límites -->
+        <section class="section section-alt" id="limites">
+            <div class="section-content">
+                <div class="section-header">
+                    <span class="section-tag">⚠ 04</span>
+                    <h2 class="section-title">Límites de la IA</h2>
+                    <p class="section-subtitle">Lo que la IA no puede hacer</p>
+                </div>
+                <div class="limits-grid" id="limites-container"></div>
+
+                <div class="warning-box reveal">
+                    <div class="warning-icon">⚠</div>
+                    <div class="warning-content">
+                        <h4>Regla de oro</h4>
+                        <p><strong>La IA no entiende como una persona.</strong> Imita patrones de lenguaje con sofisticación estadística. Siempre verifica sus resultados antes de usarlos en decisiones críticas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Claves -->
+        <section class="section" id="claves">
+            <div class="section-content">
+                <div class="section-header">
+                    <span class="section-tag">🔑 05</span>
+                    <h2 class="section-title">Ideas clave</h2>
+                    <p class="section-subtitle">Para recordar siempre</p>
+                </div>
+                <div class="key-ideas-grid" id="claves-container"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mensaje de acceso requerido -->
+    <section class="auth-required" id="auth-required">
+        <div class="container">
+            <div class="auth-card">
+                <div class="auth-icon">🔒</div>
+                <h2>Acceso restringido</h2>
+                <p>Este contenido es exclusivo para usuarios registrados. Inicia sesión o crea una cuenta para continuar.</p>
+                <div class="auth-actions">
+                    <a href="login.html" class="btn btn-primary btn-full">Iniciar sesión</a>
+                    <a href="register.html" class="btn btn-ghost btn-full">Regístrate gratis</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 IA Generativa - Plataforma educativa</p>
+        </div>
+    </footer>
+
+    <!-- Firebase + App logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtxMJju-8hOMdqFhLL85TLXzTcMCY3D44",
+            authDomain: "talleria-2f756.firebaseapp.com",
+            projectId: "talleria-2f756",
+            storageBucket: "talleria-2f756.firebasestorage.app",
+            messagingSenderId: "590645983040",
+            appId: "1:590645983040:web:7e6a816e5b5954de04aca5",
+            measurementId: "G-8NCD93QMGR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            const bar = document.getElementById('loader-bar');
+            bar.style.width = '100%';
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+                setTimeout(() => loader.remove(), 800);
+            }, 800);
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Datos del contenido con imágenes alusivas
+        const HISTORIA = [
+            { anio: 1950, evento: 'Test de Turing', desc: 'Alan Turing publica "Computing Machinery and Intelligence" y propone el test de Turing.', img: 'https://images.unsplash.com/photo-1534486077777-7990a9399b65?w=400&q=80' },
+            { anio: 1956, evento: 'Nace el término IA', desc: 'Conferencia de Dartmouth: se acuña el término "inteligencia artificial".', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80' },
+            { anio: 1986, evento: 'Retropropagación', desc: 'Se populariza el backpropagation, clave para entrenar redes neuronales profundas.', img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80' },
+            { anio: 2012, evento: 'AlexNet', desc: 'AlexNet gana ImageNet y arranca el auge del deep learning.', img: 'https://images.unsplash.com/photo-1550684838 fate?w=400&q=80' },
+            { anio: 2014, evento: 'GANs', desc: 'Ian Goodfellow presenta redes generativas antagónicas.', img: 'https://images.unsplash.com/photo-1534486077777-7990a9399b65?w=400&q=80' },
+            { anio: 2017, evento: 'Transformer', desc: 'Google publica "Attention Is All You Need": nace la arquitectura Transformer.', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80' },
+            { anio: 2020, evento: 'GPT-3', desc: 'GPT-3 demuestra generación de texto coherente a gran escala.', img: 'https://images.unsplash.com/photo-1585310479637-d571023a4f40?w=400&q=80' },
+            { anio: 2022, evento: 'IA masiva', desc: 'DALL·E 2, Stable Diffusion y ChatGPT llevan la IA generativa al público general.', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80' },
+        ];
+
+        const COMPONENTES = [
+            { term: 'Tokens', def: 'El modelo lee fragmentos, no palabras completas.', icon: '🔤' },
+            { term: 'Siguiente token', def: 'Calcula qué token es más probable tras los anteriores.', icon: '🔮' },
+            { term: 'Atención', def: 'Mira todas las partes relevantes del texto previo.', icon: '👁️' },
+            { term: 'Ventana de contexto', def: 'Texto máximo que el modelo puede tener presente.', icon: '🪟' },
+            { term: 'Temperatura', def: 'Controla aleatoriedad: baja = estable, alta = creativa.', icon: '🌡️' },
+        ];
+
+        const ETAPAS = [
+            { num: 1, title: 'Preentrenamiento', desc: 'Lee texto masivo y aprende a predecir el siguiente token.' },
+            { num: 2, title: 'Ajuste fino', desc: 'Se entrena con conversaciones para seguir instrucciones.' },
+            { num: 3, title: 'RLHF', desc: 'Personas califican respuestas; el modelo se ajusta.' },
+        ];
+
+        const LIMITES = [
+            { title: 'Alucinaciones', desc: 'Inventa datos con seguridad, busca lo plausible no lo verdadero.', icon: '🎭' },
+            { title: 'Sesgos', desc: 'Puede repetir prejuicios de los textos humanos.', icon: '⚖️' },
+            { title: 'Fecha de corte', desc: 'No conoce eventos posteriores a su entrenamiento.', icon: '📅' },
+            { title: 'No entiende', desc: 'Imita patrones de lenguaje. Siempre verifica.', icon: '🤖' },
+        ];
+
+        const CLAVES = [
+            { quote: 'Transformer (2017) es la base de la IA generativa.', takeaway: 'Arquitectura' },
+            { quote: 'Los modelos predicen qué token sigue.', takeaway: 'Predicción' },
+            { quote: 'Texto en tokens dentro de una ventana limitada.', takeaway: 'Entrada' },
+            { quote: 'Preentrenamiento → ajuste fino → RLHF.', takeaway: 'Creación' },
+            { quote: 'Puede alucinar: verifica siempre.', takeaway: 'Verificación' },
+        ];
+
+        // Estado de autenticación
+        onAuthStateChanged(auth, (user) => {
+            const mainContent = document.getElementById('main-content');
+            const authRequired = document.getElementById('auth-required');
+            const userBadge = document.getElementById('user-badge');
+            const btnLogout = document.getElementById('btn-logout');
+            const btnLogin = document.getElementById('btn-login');
+            const btnRegister = document.getElementById('btn-register');
+            const heroAuthLogin = document.querySelector('.hero-actions .btn-ghost');
+
+            if (user) {
+                const name = user.displayName || user.email.split('@')[0];
+                userBadge.textContent = name;
+                userBadge.style.display = 'inline-block';
+                btnLogout.style.display = 'flex';
+                btnLogin.style.display = 'none';
+                btnRegister.style.display = 'none';
+                if (heroAuthLogin) heroAuthLogin.style.display = 'none';
+                btnLogout.onclick = async () => {
+                    await signOut(auth);
+                    window.location.href = 'landing.html';
+                };
+                mainContent.style.display = 'block';
+                authRequired.style.display = 'none';
+                initContent();
+            } else {
+                mainContent.style.display = 'none';
+                authRequired.style.display = 'block';
+                userBadge.style.display = 'none';
+                btnLogout.style.display = 'none';
+                btnLogin.style.display = 'flex';
+                btnRegister.style.display = 'flex';
+                if (heroAuthLogin) heroAuthLogin.style.display = 'flex';
+                btnLogin.onclick = () => { window.location.href = 'login.html'; };
+            }
+        });
+
+        function initContent() {
+            renderTimeline();
+            renderComponentes();
+            renderEtapas();
+            renderLimites();
+            renderClaves();
+            initTokenizer();
+            initScrollReveal();
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            if (!container) return;
+            HISTORIA.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'timeline-item reveal';
+                el.style.setProperty('--delay', index * 100 + 'ms');
+                el.innerHTML = `
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+                            <img src="${item.img}" alt="${item.evento}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550684838 fate?w=400&q=80'">
+                        </div>
+                        <span class="timeline-year">${item.anio}</span>
+                        <h4 class="timeline-event">${item.evento}</h4>
+                        <p class="timeline-desc">${item.desc}</p>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function renderComponentes() {
+            const container = document.getElementById('components-container');
+            if (!container) return;
+            COMPONENTES.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'component-card reveal';
+                el.style.setProperty('--delay', index * 100 + 'ms');
+                el.innerHTML = `
+                    <div class="component-icon">${item.icon}</div>
+                    <h4>${item.term}</h4>
+                    <p>${item.def}</p>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function renderEtapas() {
+            const container = document.getElementById('stages-container');
+            if (!container) return;
+            ETAPAS.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'stage-card reveal';
+                el.style.setProperty('--delay', index * 100 + 'ms');
+                el.innerHTML = `
+                    <span class="stage-num">Etapa ${item.num}</span>
+                    <h4>${item.title}</h4>
+                    <p>${item.desc}</p>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function renderLimites() {
+            const container = document.getElementById('limites-container');
+            if (!container) return;
+            LIMITES.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'limit-card reveal';
+                el.style.setProperty('--delay', index * 100 + 'ms');
+                el.innerHTML = `
+                    <div class="limit-icon">${item.icon}</div>
+                    <h4>${item.title}</h4>
+                    <p>${item.desc}</p>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function renderClaves() {
+            const container = document.getElementById('claves-container');
+            if (!container) return;
+            CLAVES.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'key-idea reveal';
+                el.style.setProperty('--delay', index * 100 + 'ms');
+                el.innerHTML = `
+                    <p class="key-idea-quote">"${item.quote}"</p>
+                    <span class="key-idea-takeaway">${item.takeaway}</span>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function initTokenizer() {
+            const input = document.getElementById('tokenizer-input');
+            const output = document.getElementById('token-output');
+            const count = document.getElementById('token-count');
+            const chars = document.getElementById('char-count');
+            if (!input) return;
+            input.addEventListener('input', () => {
+                const text = input.value.trim();
+                const tokens = text ? text.split(/\s+/).filter(Boolean) : [];
+                output.innerHTML = '';
+                if (tokens.length === 0) {
+                    output.innerHTML = '<span class="token-placeholder">Escribe texto para ver los tokens</span>';
+                } else {
+                    tokens.forEach((t, i) => {
+                        const el = document.createElement('span');
+                        el.className = 'token';
+                        el.textContent = t;
+                        el.style.animationDelay = `${i * 50}ms`;
+                        output.appendChild(el);
+                    });
+                }
+                count.textContent = `${tokens.length} ${tokens.length === 1 ? 'token' : 'tokens'}`;
+                chars.textContent = `${input.value.length} caracter${input.value.length !== 1 ? 'es' : ''}`;
+            });
+        }
+
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+    </script>
+</body>
+</html>

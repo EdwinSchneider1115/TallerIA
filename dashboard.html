@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de usuario - Contenido educativo de IA generativa.">
+    <title>Panel de usuario | IA Generativa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <nav class="nav" id="nav">
+        <div class="nav__container">
+            <a href="#" class="nav__logo">
+                <svg class="nav__logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <path d="M16 2L22 8v16L16 30 10 24V8L16 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 8V24" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M10 16H22" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span class="nav__logo-text">IA Generativa</span>
+            </a>
+            <div class="nav__actions">
+                <span class="nav__user" id="nav-user">Usuario</span>
+                <button class="btn btn--ghost btn--small" id="logout-btn">Cerrar sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar__header">
+                <h3 class="sidebar__title">Contenido</h3>
+            </div>
+            <ul class="sidebar__nav" id="sidebar-nav">
+                <li><a href="#" class="sidebar__link sidebar__link--active" data-section="inicio">Inicio</a></li>
+                <li><a href="#" class="sidebar__link" data-section="historia">Historia de la IA</a></li>
+                <li><a href="#" class="sidebar__link" data-section="modelo">¿Qué es un modelo?</a></li>
+                <li><a href="#" class="sidebar__link" data-section="llm">Cómo funciona LLM</a></li>
+                <li><a href="#" class="sidebar__link" data-section="limites">Límites</a></li>
+                <li><a href="#" class="sidebar__link" data-section="claves">Ideas clave</a></li>
+            </ul>
+            <div class="sidebar__footer">
+                <p class="sidebar__user" id="sidebar-user"></p>
+            </div>
+        </aside>
+
+        <main class="dashboard-content">
+            <!-- Inicio -->
+            <section class="content-section active" id="section-inicio">
+                <div class="hero-dashboard">
+                    <h1>Bienvenido, <span id="dashboard-user-name"></span></h1>
+                    <p>Has accedido al contenido educativo de IA generativa. Selecciona un módulo del menú lateral para comenzar.</p>
+                </div>
+                <div class="grid grid--3">
+                    <div class="card">
+                        <div class="card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="card__title">Historia de la IA</h3>
+                        <p class="card__text">8 hitos desde 1950 hasta 2022.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3 class="card__title">Componentes LLM</h3>
+                        <p class="card__text">Tokens, atención, ventana de contexto.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card__title">Límites</h3>
+                        <p class="card__text">Alucinaciones, sesgos, verificación.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Historia -->
+            <section class="content-section" id="section-historia">
+                <div class="section__header">
+                    <span class="section__tag">01</span>
+                    <h2 class="section__title">Historia breve de la IA</h2>
+                    <p class="section__subtitle">Los hitos fundamentales que llevaron a la IA generativa actual</p>
+                </div>
+                <div class="timeline" id="timeline-dashboard"></div>
+            </section>
+
+            <!-- Modelo -->
+            <section class="content-section" id="section-modelo">
+                <div class="section__header">
+                    <span class="section__tag">02</span>
+                    <h2 class="section__title">¿Qué es un modelo de IA?</h2>
+                    <p class="section__subtitle">Concepto fundamental: aprendizaje de patrones, no memorización</p>
+                </div>
+                <div class="grid grid--2">
+                    <article class="card card--feature">
+                        <div class="card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="card__title">No memoriza, aprende patrones</h3>
+                        <p class="card__text">Un modelo ajusta millones o miles de millones de parámetros internos hasta que sus salidas se parecen estadísticamente a los datos de entrenamiento.</p>
+                    </article>
+                    <article class="card card--feature">
+                        <div class="card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="card__title">La analogía del estudiante</h3>
+                        <p class="card__text">Imagina un estudiante que leyó millones de páginas. No recuerda cada una, pero aprendió cómo se arman las frases.</p>
+                    </article>
+                </div>
+                <div class="concept-box">
+                    <div class="concept-box__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <div class="concept-box__content">
+                        <h4 class="concept-box__title">Parámetros = Conocimiento comprimido</h4>
+                        <p class="concept-box__text">GPT-3 tiene 175 mil millones de parámetros. Cada parámetro es un número que codifica una fracción minúscula de los patrones aprendidos. Juntos, forman una representación comprimida del lenguaje humano.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LLM -->
+            <section class="content-section" id="section-llm">
+                <div class="section__header">
+                    <span class="section__tag">03</span>
+                    <h2 class="section__title">Cómo funciona un modelo de lenguaje (LLM)</h2>
+                    <p class="section__subtitle">Componentes clave y las tres etapas de creación</p>
+                </div>
+                <div class="components" id="components-dashboard"></div>
+                <div class="stages" id="stages-dashboard">
+                    <div class="stages__track" id="stages-dashboard-track"></div>
+                    <div class="stages__nav" id="stages-nav" role="tablist" aria-label="Etapas de creación del modelo"></div>
+                </div>
+                <div class="tokenizer-demo" id="tokenizer-dashboard">
+                    <h3>Visualizador de Tokens</h3>
+                    <p>Escribe texto para ver cómo lo fragmenta un modelo.</p>
+                    <textarea id="tokenizer-input-dashboard" rows="3" placeholder="Escribe algo..."></textarea>
+                    <div class="tokenizer-demo__output" id="tokenizer-output-dashboard"></div>
+                    <div class="tokenizer-demo__stats">
+                        <span id="token-count-dashboard">0 tokens</span>
+                        <span id="char-count-dashboard">0 caracteres</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Límites -->
+            <section class="content-section" id="section-limites">
+                <div class="section__header">
+                    <span class="section__tag">04</span>
+                    <h2 class="section__title">Límites que debes conocer</h2>
+                    <p class="section__subtitle">La IA generativa no es magia: tiene fronteras claras y riesgos reales</p>
+                </div>
+                <div class="limits__grid" id="limits-dashboard"></div>
+                <div class="warning-box">
+                    <div class="warning-box__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="warning-box__content">
+                        <h4 class="warning-box__title">Regla de oro</h4>
+                        <p class="warning-box__text"><strong>La IA no «entiende» como una persona.</strong> Imita patrones de lenguaje con sofisticación estadística. <strong>Siempre verifica sus resultados</strong> antes de usarlos en contextos críticos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Claves -->
+            <section class="content-section" id="section-claves">
+                <div class="section__header">
+                    <span class="section__tag">05</span>
+                    <h2 class="section__title">Ideas clave para recordar</h2>
+                    <p class="section__subtitle">Cinco conceptos que debes tener siempre presentes</p>
+                </div>
+                <div class="key-ideas" id="key-ideas-dashboard"></div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2024 IA Generativa - Plataforma educativa. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtxMJju-8hOMdqFhLL85TLXzTcMCY3D44",
+            authDomain: "talleria-2f756.firebaseapp.com",
+            projectId: "talleria-2f756",
+            storageBucket: "talleria-2f756.firebasestorage.app",
+            messagingSenderId: "590645983040",
+            appId: "1:590645983040:web:7e6a816e5b5954de04aca5",
+            measurementId: "G-8NCD93QMGR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Datos del contenido
+        const HISTORIA = [
+            { anio: 1950, evento: 'Test de Turing', desc: 'Alan Turing publica "Computing Machinery and Intelligence" y propone el test de Turing.' },
+            { anio: 1956, evento: 'Nace el término IA', desc: 'Conferencia de Dartmouth: se acuña el término "inteligencia artificial".' },
+            { anio: 1986, evento: 'Retropropagación', desc: 'Se populariza el backpropagation, clave para entrenar redes neuronales profundas.' },
+            { anio: 2012, evento: 'AlexNet', desc: 'AlexNet gana ImageNet y arranca el auge del deep learning.' },
+            { anio: 2014, evento: 'GANs', desc: 'Ian Goodfellow presenta las redes generativas antagónicas (GAN).' },
+            { anio: 2017, evento: 'Transformer', desc: 'Google publica "Attention Is All You Need": nace la arquitectura Transformer.' },
+            { anio: 2020, evento: 'GPT-3', desc: 'GPT-3 demuestra generación de texto coherente a gran escala.' },
+            { anio: 2022, evento: 'IA generativa masiva', desc: 'DALL·E 2, Stable Diffusion y ChatGPT llevan la IA generativa al público general.' },
+        ];
+
+        const COMPONENTES = [
+            { term: 'Tokens', def: 'El modelo no lee letras ni palabras completas, sino fragmentos. Una palabra corta = 1 token; una larga = varios.' },
+            { term: 'Predicción del siguiente token', def: 'Su tarea básica: calcular qué token es más probable tras los anteriores. Repitiendo esto, genera frases y párrafos.' },
+            { term: 'Atención (Transformer)', def: 'Permite "mirar" todas las partes relevantes del texto previo al elegir cada token, no solo la última palabra.' },
+            { term: 'Ventana de contexto', def: 'Cantidad máxima de texto que el modelo puede tener presente a la vez. Si se pasa, olvida lo inicial.' },
+            { term: 'Temperatura', def: 'Controla aleatoriedad: baja = respuestas estables/predecibles; alta = respuestas variadas/creativas.' },
+        ];
+
+        const ETAPAS = [
+            { num: 1, title: 'Preentrenamiento', desc: 'El modelo lee cantidades masivas de texto y aprende a predecir el siguiente token. Etapa más costosa.' },
+            { num: 2, title: 'Ajuste fino (fine-tuning)', desc: 'Se entrena con ejemplos de conversaciones y tareas para que aprenda a seguir instrucciones.' },
+            { num: 3, title: 'RLHF', desc: 'Personas califican respuestas; el modelo se ajusta para dar las consideradas más útiles y seguras.' },
+        ];
+
+        const LIMITES = [
+            { title: 'Alucinaciones', desc: 'Inventa datos, citas o fuentes con seguridad, porque busca lo plausible, no lo verdadero.' },
+            { title: 'Sesgos', desc: 'Aprende de textos humanos y puede repetir prejuicios.' },
+            { title: 'Fecha de corte', desc: 'No conoce eventos posteriores a su entrenamiento (salvo que use búsqueda externa).' },
+            { title: 'No entiende como una persona', desc: 'Imita patrones de lenguaje. Siempre verifica sus resultados.' },
+        ];
+
+        const CLAVES = [
+            { quote: 'La IA generativa se basa en la arquitectura Transformer (2017).', takeaway: 'Arquitectura base' },
+            { quote: 'Un modelo aprende patrones y los usa para predecir qué sigue.', takeaway: 'Predicción de token' },
+            { quote: 'El texto se procesa en tokens y cabe en una ventana de contexto limitada.', takeaway: 'Límite de entrada' },
+            { quote: 'Se crea en tres etapas: preentrenamiento → ajuste fino → retroalimentación humana.', takeaway: 'Ciclo de creación' },
+            { quote: 'Puede alucinar: verifica siempre lo que dice.', takeaway: 'Verificación humana' },
+        ];
+
+        // Estado de autenticación
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            const displayName = user.displayName || user.email.split('@')[0];
+            document.getElementById('dashboard-user-name').textContent = displayName;
+            document.getElementById('nav-user').textContent = displayName;
+            document.getElementById('sidebar-user').textContent = displayName;
+        });
+
+        // Cerrar sesión
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            await signOut(auth);
+            window.location.href = 'landing.html';
+        });
+
+        // Navegación por secciones
+        const links = document.querySelectorAll('.sidebar__link');
+        const sections = document.querySelectorAll('.content-section');
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('data-section');
+
+                links.forEach(l => l.classList.remove('sidebar__link--active'));
+                link.classList.add('sidebar__link--active');
+
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(`section-${target}`).classList.add('active');
+            });
+        });
+
+        // Renderizar Timeline
+        function renderTimeline() {
+            const container = document.getElementById('timeline-dashboard');
+            if (!container) return;
+            HISTORIA.forEach((item) => {
+                const article = document.createElement('article');
+                article.className = 'timeline-item';
+                article.innerHTML = `
+                    <div class="timeline__marker"></div>
+                    <div class="timeline__content">
+                        <span class="timeline__year">${item.anio}</span>
+                        <h4 class="timeline__event">${item.evento}</h4>
+                        <p class="timeline__desc">${item.desc}</p>
+                    </div>
+                `;
+                container.appendChild(article);
+            });
+        }
+
+        // Renderizar Componentes
+        function renderComponentes() {
+            const container = document.getElementById('components-dashboard');
+            if (!container) return;
+            COMPONENTES.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'component-card';
+                card.innerHTML = `
+                    <span class="component__term">${item.term}</span>
+                    <p class="component__def">${item.def}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Renderizar Etapas
+        function renderEtapas() {
+            const track = document.getElementById('stages-dashboard-track');
+            const nav = document.getElementById('stages-nav');
+            if (!track || !nav) return;
+
+            ETAPAS.forEach((etapa, index) => {
+                const card = document.createElement('div');
+                card.className = `stage-card ${index === 0 ? 'active' : ''}`;
+                card.innerHTML = `
+                    <span class="stage__num">Etapa ${etapa.num}</span>
+                    <h4 class="stage__title">${etapa.title}</h4>
+                    <p class="stage__desc">${etapa.desc}</p>
+                `;
+                track.appendChild(card);
+
+                const btn = document.createElement('button');
+                btn.className = `stage-btn ${index === 0 ? 'active' : ''}`;
+                btn.setAttribute('role', 'tab');
+                btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.stage-card').forEach((c, i) => c.classList.toggle('active', i === index));
+                    document.querySelectorAll('.stage-btn').forEach((b, i) => {
+                        b.classList.toggle('active', i === index);
+                        b.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                    });
+                });
+                nav.appendChild(btn);
+            });
+        }
+
+        // Renderizar Límites
+        function renderLimites() {
+            const container = document.getElementById('limits-dashboard');
+            if (!container) return;
+            LIMITES.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'limit-card';
+                card.innerHTML = `
+                    <div class="limit__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h4 class="limit__title">${item.title}</h4>
+                    <p class="limit__desc">${item.desc}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Renderizar Claves
+        function renderClaves() {
+            const container = document.getElementById('key-ideas-dashboard');
+            if (!container) return;
+            CLAVES.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'key-idea';
+                card.innerHTML = `
+                    <p class="key-idea__quote">"${item.quote}"</p>
+                    <span class="key-idea__takeaway">${item.takeaway}</span>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Tokenizer dashboard
+        const tokInput = document.getElementById('tokenizer-input-dashboard');
+        const tokOutput = document.getElementById('tokenizer-output-dashboard');
+        const tokCount = document.getElementById('token-count-dashboard');
+        const tokChars = document.getElementById('char-count-dashboard');
+
+        if (tokInput) {
+            tokInput.addEventListener('input', () => {
+                const text = tokInput.value.trim();
+                const tokens = text ? text.split(/\s+/).filter(Boolean) : [];
+                tokOutput.innerHTML = '';
+                if (tokens.length === 0) {
+                    const ph = document.createElement('span');
+                    ph.className = 'tokenizer-demo__placeholder';
+                    ph.textContent = 'Los tokens aparecerán aquí';
+                    tokOutput.appendChild(ph);
+                } else {
+                    tokens.forEach((t, i) => {
+                        const el = document.createElement('span');
+                        el.className = 'token';
+                        el.textContent = t;
+                        el.style.animationDelay = `${i * 40}ms`;
+                        tokOutput.appendChild(el);
+                    });
+                }
+                tokCount.textContent = `${tokens.length} ${tokens.length === 1 ? 'token' : 'tokens'}`;
+                tokChars.textContent = `${tokInput.value.length} caracter${tokInput.value.length !== 1 ? 'es' : ''}`;
+            });
+        }
+
+        // Ejecutar renderizados
+        renderTimeline();
+        renderComponentes();
+        renderEtapas();
+        renderLimites();
+        renderClaves();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

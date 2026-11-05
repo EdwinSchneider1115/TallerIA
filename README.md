@@ -2,6 +2,16 @@
 
 Sitio web educativo sobre los fundamentos de la IA Generativa con autenticación mediante Firebase.
 
+## 🌐 Ver en vivo (GitHub Pages)
+
+Si el dueño del repositorio ha activado GitHub Pages, puedes abrir la plataforma directamente desde aquí:
+
+> [🚀 Abrir IA Generativa en vivo](https://EdwinSchneider1115.github.io/TallerIA/landing.html)
+
+> ⚠️ Si el enlace no funciona, es porque GitHub Pages aún no está activado. Ve a **Settings → Pages** en el repositorio y activa la fuente `main` / `(root)`.
+
+---
+
 ## Cómo ejecutar localmente (Windows)
 
 ### Opción 1: Doble clic (Recomendado)
@@ -54,7 +64,7 @@ Antes de que funcione el login/registro, debes configurar Firebase:
 3. Ve a **Authentication → Sign-in method**
 4. Activa **Email/Password** y guarda
 5. Ve a **Authentication → Settings → Authorized domains**
-6. Agrega `localhost` si pruebas localmente, o tu dominio si lo subes a hosting
+6. Agrega `localhost` si pruebas localmente, o tu dominio de GitHub Pages si lo hospedas allí
 
 ## No requiere servidor
 

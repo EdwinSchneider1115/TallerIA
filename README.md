@@ -21,18 +21,16 @@ Sitio web educativo sobre los fundamentos de la IA Generativa con autenticación
 
 ---
 
-## 💻 Cómo ejecutar localmente (Windows)
+## 💻 Cómo ejecutar localmente
 
-Si prefieres descargar el proyecto y abrirlo en tu computadora:
+Este sitio es totalmente estático. No necesitas instalar nada. Solo abre cualquiera de estos archivos directamente en tu navegador (Chrome, Edge, Firefox, etc.):
 
-### Opción 1: Doble clic (Recomendado)
-Haz doble clic en **`abrir.bat`** dentro de la carpeta `aplicacionWebEducativa/`.
+- **`index.html`** — Página de inicio
+- **`landing.html`** — Página principal (contenido educativo)
+- **`login.html`** — Iniciar sesión
+- **`register.html`** — Crear cuenta
 
-### Opción 2: PowerShell
-Haz clic derecho sobre **`ABRIR.ps1`** → "Ejecutar con PowerShell".
-
-### Opción 3: Abrir manualmente
-Busca y abre el archivo **`index.html`** o **`landing.html`** directamente en tu navegador (Chrome, Edge, Firefox, etc.).
+No necesitas servidor, ni Node.js, ni Python. Solo haz doble clic en el archivo `.html`.
 
 ---
 
@@ -40,16 +38,14 @@ Busca y abre el archivo **`index.html`** o **`landing.html`** directamente en tu
 
 ```
 aplicacionWebEducativa/
-├── index.html         # Página de inicio local
+├── index.html         # Página de inicio
 ├── landing.html       # Página principal (hero + contenido)
 ├── login.html         # Inicio de sesión
 ├── register.html      # Registro de usuarios
+├── dashboard.html     # Panel de usuario (interno, requiere login)
 ├── styles.css         # Estilos principales
 ├── script.js          # Lógica de la aplicación
 ├── firebase-config.js # Configuración de Firebase
-├── abrir.bat          # Ejecutable Windows (doble clic)
-├── ABRIR.ps1          # Ejecutable PowerShell
-├── dashboard.html     # Panel de usuario (interno)
 └── README.md          # Este archivo
 ```
 
@@ -63,7 +59,6 @@ aplicacionWebEducativa/
 - ✅ Línea de tiempo interactiva con imágenes
 - ✅ Visualizador de tokens
 - ✅ Panel de usuario con logout
-- ✅ Ejecutable para Windows (.bat y .ps1)
 
 ---
 
@@ -79,7 +74,3 @@ Antes de que funcione el login/registro, debes configurar Firebase:
 6. Agrega `localhost` (para local) o tu dominio de GitHub Pages
 
 ---
-
-## 🖥️ No requiere servidor
-
-Este sitio es totalmente estático. No necesitas instalar Node.js, Python, ni ningún servidor web. Solo abre los archivos HTML directamente en tu navegador.
